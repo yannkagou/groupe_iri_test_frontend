@@ -54,35 +54,35 @@ let leadershipIndividuel = ref(0);
 let leadershipEtatique = ref(0);
 let leadershipCivilisationnel = ref(0);
   
-const getReleves = () => {
-axios.get('/releves/releves/')
-    .then(response => {
-    console.log(response.data)
-    releves.value = response.data;
-    })
-    .catch(error => {
-    console.error(error);
-    });
+const getReleves = async () => {
+  await axios.get('/releves/releves/')
+      .then(response => {
+        console.log(response.data)
+        releves.value = response.data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
 };
   
-const saveReleve = () => {
-const data = {
-    leadershipIndividuel: leadershipIndividuel.value,
-    leadershipEtatique: leadershipEtatique.value,
-    leadershipCivilisationnel: leadershipCivilisationnel.value,
-};
+const saveReleve = async () => {
+  const data = {
+      leadershipIndividuel: leadershipIndividuel.value,
+      leadershipEtatique: leadershipEtatique.value,
+      leadershipCivilisationnel: leadershipCivilisationnel.value,
+  };
 
-axios.post('/releves/releves/', data)
-    .then(response => {
-    console.log(response.data)
-    getReleves();
-    leadershipIndividuel.value = 0;
-    leadershipEtatique.value = 0;
-    leadershipCivilisationnel.value = 0;
-    })
-    .catch(error => {
-    console.error(error);
-    });
+  await axios.post('/releves/releves/', data)
+      .then(response => {
+        console.log(response.data)
+        getReleves();
+        leadershipIndividuel.value = 0;
+        leadershipEtatique.value = 0;
+        leadershipCivilisationnel.value = 0;
+      })
+      .catch(error => {
+        console.error(error);
+      });
 };
 
 </script>

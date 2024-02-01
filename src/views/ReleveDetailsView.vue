@@ -51,10 +51,10 @@ const route = useRoute()
 
 const releve = ref({})
 
-const getReleve = () => {
+const getReleve = async () => {
   const releveID = route.params.id
 
-  axios
+  await axios
     .get(`/releves/releves/${releveID}`)
     .then(response => {
         releve.value = response.data

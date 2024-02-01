@@ -31,8 +31,8 @@
   let leadershipEtatique = ref(0);
   let leadershipCivilisationnel = ref(0);
   
-  const getReleves = () => {
-    axios.get('/releves/releves/')
+  const getReleves = async () => {
+    await axios.get('/releves/releves/')
       .then(response => {
         console.log(response.data)
         releves.value = response.data;
@@ -42,14 +42,14 @@
       });
   };
   
-  const saveReleve = () => {
+  const saveReleve = async () => {
     const data = {
       leadershipIndividuel: leadershipIndividuel.value,
       leadershipEtatique: leadershipEtatique.value,
       leadershipCivilisationnel: leadershipCivilisationnel.value,
     };
   
-    axios.post('/releves/releves/', data)
+    await axios.post('/releves/releves/', data)
       .then(response => {
         console.log(response.data)
         getReleves();

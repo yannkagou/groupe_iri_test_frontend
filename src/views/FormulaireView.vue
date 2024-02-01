@@ -38,8 +38,8 @@
   let pays = ref('');
   let tel = ref('');
   
-  const getFormulaires = () => {
-    axios.get('/formulaires/formulaires/')
+  const getFormulaires = async () => {
+    await axios.get('/formulaires/formulaires/')
       .then(response => {
         console.log(response.data)
         formulaires.value = response.data
@@ -49,7 +49,7 @@
       });
   };
   
-  const saveFormulaire = () => {
+  const saveFormulaire = async () => {
     const data = {
       nom: nom.value,
       prenom: prenom.value,
@@ -58,7 +58,7 @@
       tel: tel.value,
     };
   
-    axios.post('/formulaires/formulaires/', data)
+    await axios.post('/formulaires/formulaires/', data)
       .then(response => {
           console.log(response.data)
         //   getFormulaires();

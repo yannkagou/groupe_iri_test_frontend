@@ -53,10 +53,10 @@ const route = useRoute()
 
 const formulaire = ref({})
 
-const getFormulaire = () => {
+const getFormulaire = async () => {
   const formulaireID = route.params.id
 
-  axios
+  await axios
     .get(`/formulaires/formulaires/${formulaireID}`)
     .then(response => {
       formulaire.value = response.data
@@ -83,11 +83,11 @@ const getPdf = () => {
 
     // Options for the PDF generation
     const options = {
-    filename: `formulaire_${route.params.id}.pdf`,
-    margin: [20, 20, 20, 20],
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      filename: `formulaire_${route.params.id}.pdf`,
+      margin: [20, 20, 20, 20],
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     }
 
     html2pdf().set(options).from(element).save()

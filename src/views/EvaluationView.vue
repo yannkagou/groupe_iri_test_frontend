@@ -36,8 +36,8 @@
   let produitPratique = ref(10);
   let prixCher = ref(10);
   
-  const getEvaluations = () => {
-    axios.get('/evaluations/evaluations/')
+  const getEvaluations = async () => {
+    await axios.get('/evaluations/evaluations/')
       .then(response => {
         console.log(response.data)
         evaluations.value = response.data;
@@ -47,7 +47,7 @@
       });
   };
   
-  const saveEvaluation = () => {
+  const saveEvaluation = async () => {
     const data = {
       nom: nom.value,
       client_ponctuel: clientPonctuel.value,
@@ -55,7 +55,7 @@
       prix_cher: prixCher.value,
     };
   
-    axios.post('/evaluations/evaluations/', data)
+    await axios.post('/evaluations/evaluations/', data)
       .then(response => {
           getEvaluations();
           toast.success("Evaluation ajoutée")
